@@ -83,7 +83,9 @@ func main() {
 	http.HandleFunc("/upload/", upload)
 	http.HandleFunc("/version/", sayVersion)
 	http.HandleFunc("/html/", fileserve)
-	http.Handle("/look/", http.StripPrefix("/file", http.FileServer(http.Dir("/Users/Christopher/Documents/Programmering/go"))))
+	//http.Handle("/look/", http.StripPrefix("/file", http.FileServer(http.Dir("."))))
+	http.Handle("/look/", http.StripPrefix("/look/", http.FileServer(http.Dir("/app"))))
+
 	err := http.ListenAndServe(":"+strconv.Itoa(*port), nil)
 
 	if err != nil {
