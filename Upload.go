@@ -15,6 +15,8 @@ import (
 	"time"
 )
 
+const version = 1.0
+
 var uploadTemplate, _ = template.ParseFiles("/Users/Christopher/Documents/" +
 	"Programmering/go/libs/src/github.com/christopherL91/Upload/Upload.html")
 
@@ -61,9 +63,12 @@ func sayDate(rw http.ResponseWriter, req *http.Request) {
 }
 
 func sayName(rw http.ResponseWriter, req *http.Request) {
-
 	remPartOfURL := req.URL.Path[len("/name/"):]
 	fmt.Fprintf(rw, "Hello %s", remPartOfURL)
+}
+
+func sayVersion(rw http.ResponseWriter, req *http.Request) {
+	fmt.Fprintf(rw, "Version: %s", version)
 }
 
 func main() {
@@ -76,6 +81,7 @@ func main() {
 	http.HandleFunc("/name/", sayName)
 	http.HandleFunc("/date/", sayDate)
 	http.HandleFunc("/upload/", upload)
+	http.HandleFunc("/version/", sayVersion)
 	http.HandleFunc("/html/", fileserve)
 	http.Handle("/look/", http.StripPrefix("/file", http.FileServer(http.Dir("/Users/Christopher/Documents/Programmering/go"))))
 	err := http.ListenAndServe(":"+strconv.Itoa(*port), nil)
