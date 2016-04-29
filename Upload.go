@@ -15,7 +15,7 @@ import (
 	"time"
 )
 
-const version string = "1.0"
+const version string = "1.1"
 
 var uploadTemplate, _ = template.ParseFiles("/Users/Christopher/Documents/" +
 	"Programmering/go/libs/src/github.com/christopherL91/Upload/Upload.html")
